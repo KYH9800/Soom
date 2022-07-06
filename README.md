@@ -2,7 +2,7 @@
 
 Zoom Clone using NodeJS, WebRTC and Websokets
 
-### 선수 지식
+# 선수 지식
 
 ## back-end
 
