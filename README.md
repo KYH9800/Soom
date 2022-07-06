@@ -4,11 +4,7 @@ Zoom Clone using NodeJS, WebRTC and Websokets
 
 ### 선수 지식
 
----
-
 ## back-end
-
----
 
 1. `Express`
 2. `Pug`
@@ -20,12 +16,8 @@ Zoom Clone using NodeJS, WebRTC and Websokets
 
 ## front-end
 
----
-
 1. `vanillaJS`
 
 ## NodeJS
-
----
 
 1. `v14.17.3 이상`
