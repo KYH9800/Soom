@@ -1,0 +1,14 @@
+{
+  "name": "zoom",
+  "version": "1.0.0",
+  "description": "Zoom Clone using NodeJS, WebRTC and Websokets",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "KYH",
+  "license": "MIT",
+  "devDependencies": {
+    "nodemon": "^2.0.19"
+  }
+}
