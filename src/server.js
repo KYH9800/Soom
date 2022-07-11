@@ -21,4 +21,8 @@ const handleListen = () => console.log(`Listening in http://localhost:3000/`);
 const server = http.createServer(app);
 const wss = new WebSoket.Server({ server });
 
+wss.on('connection', (soket) => {
+  console.log(soket); // 여기서 access를 할 수 있다.
+});
+
 server.listen(3000, handleListen);
