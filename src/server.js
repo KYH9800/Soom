@@ -22,7 +22,11 @@ const server = http.createServer(app);
 const wss = new WebSoket.Server({ server });
 
 wss.on('connection', (soket) => {
-  console.log(soket); // 여기서 access를 할 수 있다.
+  console.log('Connected to Browser ✅');
+  soket.on('close', () => {
+    console.log('Disconnected from Browser ❌');
+  });
+  soket.send('hello!');
 });
 
 server.listen(3000, handleListen);
