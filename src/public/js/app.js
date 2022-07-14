@@ -18,4 +18,4 @@ aWebSocket.addEventListener('close', () => {
 
 setTimeout(() => {
   aWebSocket.send('hello from the browser!!'); // server로 전송되는 메세지
-}, 2000);
+}, 3000);
