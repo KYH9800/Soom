@@ -26,7 +26,10 @@ wss.on('connection', (soket) => {
   soket.on('close', () => {
     console.log('Disconnected from Browser ❌');
   });
-  soket.send('hello!');
+  soket.on('message', (message) => {
+    console.log(message.toString()); // browser에서 받아오는 메세지
+  });
+  soket.send('hello!'); // 브라우저로 보내는 메세지
 });
 
 server.listen(3000, handleListen);

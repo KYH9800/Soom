@@ -8,10 +8,14 @@ aWebSocket.addEventListener('open', (event) => {
 
 // 메세지 수신
 aWebSocket.addEventListener('message', (message) => {
-  console.log('Just got this: ', message.data, ' from the Server');
+  console.log('New message: ', message.data, ' from the Server'); // server로 보내는 메세지
 });
 
 // 서버와 연결이 끊기면
 aWebSocket.addEventListener('close', () => {
   console.log('Disconnected from Server ❌');
 });
+
+setTimeout(() => {
+  aWebSocket.send('hello from the browser!!'); // server로 전송되는 메세지
+}, 2000);
