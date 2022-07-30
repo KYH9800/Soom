@@ -21,15 +21,18 @@ const handleListen = () => console.log(`Listening in http://localhost:3000/`);
 const server = http.createServer(app);
 const wss = new WebSoket.Server({ server });
 
-wss.on('connection', (soket) => {
+// fakedata
+const sockets = []; // chrome, firefox
+
+wss.on('connection', (socket) => {
+  sockets.push(socket);
   console.log('Connected to Browser ✅');
-  soket.on('close', () => {
+  socket.on('close', () => {
     console.log('Disconnected from Browser ❌');
   });
-  soket.on('message', (message) => {
-    console.log(message.toString()); // browser에서 받아오는 메세지
+  socket.on('message', (message) => {
+    sockets.forEach((aSocket) => aSocket.send(message.toString()));
   });
-  soket.send('hello!'); // 브라우저로 보내는 메세지
 });
 
 server.listen(3000, handleListen);
