@@ -26,23 +26,20 @@ const sockets = []; // chrome, firefox
 
 wss.on('connection', (socket) => {
   sockets.push(socket);
+  socket['nickname'] = 'anonymus';
   console.log('Connected to Browser ✅');
   socket.on('close', () => {
     console.log('Disconnected from Browser ❌');
   });
-  socket.on('message', (message) => {
-    sockets.forEach((aSocket) => aSocket.send(message.toString()));
+  socket.on('message', (msg) => {
+    const message = JSON.parse(msg);
+    switch (message.type) {
+      case 'new_message':
+        sockets.forEach((aSocket) => aSocket.send(`${socket.nickname}: ${message.payload}`));
+      case 'nickname':
+        socket['nickname'] = message.payload;
+    }
   });
 });
 
 server.listen(3000, handleListen);
-
-// {
-//   type: "message",
-//   payload: "hello everyone!"
-// }
-
-// {
-//   type: "nickname",
-//   payload: "kyh"
-// }
