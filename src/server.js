@@ -1,5 +1,5 @@
 const http = require('http');
-const WebSoket = require('ws');
+const SocketIO = require('socket.io');
 const express = require('express');
 
 const app = express();
@@ -18,28 +18,28 @@ app.get('/*', (_, res) => res.redirect('/')); // user가 어떤 url로 이동하
 const handleListen = () => console.log(`Listening in http://localhost:3000/`);
 
 // 같은 서버에서 http, webSoket 둘 다 작동 시킬 수 있다.
-const server = http.createServer(app);
-const wss = new WebSoket.Server({ server });
+const httpServer = http.createServer(app);
+const io = SocketIO(httpServer);
 
 // fakedata
-const sockets = []; // chrome, firefox
-
-wss.on('connection', (socket) => {
-  sockets.push(socket);
-  socket['nickname'] = 'anonymus';
-  console.log('Connected to Browser ✅');
-  socket.on('close', () => {
-    console.log('Disconnected from Browser ❌');
-  });
-  socket.on('message', (msg) => {
-    const message = JSON.parse(msg);
-    switch (message.type) {
-      case 'new_message':
-        sockets.forEach((aSocket) => aSocket.send(`${socket.nickname}: ${message.payload}`));
-      case 'nickname':
-        socket['nickname'] = message.payload;
-    }
-  });
-});
+// const wss = new WebSoket.Server({ server });
+// const sockets = []; // chrome, firefox
+// wss.on('connection', (socket) => {
+//   sockets.push(socket);
+//   socket['nickname'] = 'anonymus';
+//   console.log('Connected to Browser ✅');
+//   socket.on('close', () => {
+//     console.log('Disconnected from Browser ❌');
+//   });
+//   socket.on('message', (msg) => {
+//     const message = JSON.parse(msg);
+//     switch (message.type) {
+//       case 'new_message':
+//         sockets.forEach((aSocket) => aSocket.send(`${socket.nickname}: ${message.payload}`));
+//       case 'nickname':
+//         socket['nickname'] = message.payload;
+//     }
+//   });
+// });
 
 server.listen(3000, handleListen);
