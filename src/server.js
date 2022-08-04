@@ -21,6 +21,11 @@ const handleListen = () => console.log(`Listening in http://localhost:3000/`);
 const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 
+io.on('connection', (socket) => {
+  // todo...
+  console.log('a user connected');
+});
+
 // fakedata
 // const wss = new WebSoket.Server({ server });
 // const sockets = []; // chrome, firefox
