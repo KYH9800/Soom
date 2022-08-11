@@ -15,8 +15,6 @@ app.use('/public', express.static(__dirname + '/public'));
 app.get('/', (_, res) => res.render('home')); // router handler, 현재 프로젝트에서는 home url만 쓸 것이다.
 app.get('/*', (_, res) => res.redirect('/')); // user가 어떤 url로 이동하던지 home으로 돌려보낸다.
 
-const handleListen = () => console.log(`Listening in http://localhost:3000/`);
-
 // 같은 서버에서 http, webSoket 둘 다 작동 시킬 수 있다.
 const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
@@ -25,6 +23,9 @@ io.on('connection', (socket) => {
   // todo...
   console.log('a user connected');
 });
+
+const handleListen = () => console.log(`Listening in http://localhost:3000/`);
+httpServer.listen(3000, handleListen);
 
 // fakedata
 // const wss = new WebSoket.Server({ server });
@@ -46,5 +47,3 @@ io.on('connection', (socket) => {
 //     }
 //   });
 // });
-
-server.listen(3000, handleListen);
