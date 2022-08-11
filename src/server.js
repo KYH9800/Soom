@@ -20,8 +20,7 @@ const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 
 io.on('connection', (socket) => {
-  // todo...
-  console.log('a user connected');
+  console.log(socket);
 });
 
 const handleListen = () => console.log(`Listening in http://localhost:3000/`);
