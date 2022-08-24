@@ -20,29 +20,10 @@ const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 
 io.on('connection', (socket) => {
-  console.log(socket);
+  socket.on('enter_room', (msg) => {
+    console.log(msg);
+  });
 });
 
 const handleListen = () => console.log(`Listening in http://localhost:3000/`);
 httpServer.listen(3000, handleListen);
-
-// fakedata
-// const wss = new WebSoket.Server({ server });
-// const sockets = []; // chrome, firefox
-// wss.on('connection', (socket) => {
-//   sockets.push(socket);
-//   socket['nickname'] = 'anonymus';
-//   console.log('Connected to Browser ✅');
-//   socket.on('close', () => {
-//     console.log('Disconnected from Browser ❌');
-//   });
-//   socket.on('message', (msg) => {
-//     const message = JSON.parse(msg);
-//     switch (message.type) {
-//       case 'new_message':
-//         sockets.forEach((aSocket) => aSocket.send(`${socket.nickname}: ${message.payload}`));
-//       case 'nickname':
-//         socket['nickname'] = message.payload;
-//     }
-//   });
-// });
