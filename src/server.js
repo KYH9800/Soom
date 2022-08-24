@@ -20,8 +20,11 @@ const httpServer = http.createServer(app);
 const io = SocketIO(httpServer);
 
 io.on('connection', (socket) => {
-  socket.on('enter_room', (msg) => {
-    console.log(msg);
+  socket.on('enter_room', (roomName, done) => {
+    console.log(roomName);
+    setTimeout(() => {
+      done(roomName);
+    }, 2000);
   });
 });
 
